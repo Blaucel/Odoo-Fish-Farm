@@ -1,0 +1,89 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="ejro2122.list">
+      <field name="name">fish list</field>
+      <field name="model">ejro2122.fish</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="specie"/>
+          <field name="comname"/>
+          <field name="weight"/>
+          <field name="feeding"/>
+          <field name="eggtime"/>
+          <field name="larvaetime"/>
+          <field name="juventime"/>
+          <field name="adultime"/>
+          <field name="lifecycle"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="ejro2122.pool">
+      <field name="name">pool list</field>
+      <field name="model">ejro2122.pool</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="capacity"/>
+          <field name="water"/>
+          <field name="state"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening for Fish-->
+
+    <record model="ir.actions.act_window" id="fish.action_window">
+      <field name="name">fish window</field>
+      <field name="res_model">ejro2122.fish</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+      <!-- actions opening for Pool-->
+
+    <record model="ir.actions.act_window" id="pool.action_window">
+      <field name="name">pool window</field>
+      <field name="res_model">ejro2122.pool</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="ejro2122.action_server">
+      <field name="name">EJRO2122 server</field>
+      <field name="model_id" ref="model_ejro2122_ejro2122"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="fishfarm" id="ejro2122.menu_root" web_icon="cook,static/description/icon.png"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Pools" id="ejro2122.menu_1" parent="ejro2122.menu_root" sequence="1"/>
+    <menuitem name="Fishes" id="ejro2122.menu_2" parent="ejro2122.menu_root" sequence="2" action="fish.action_window"/>
+
+    <!-- actions -->
+
+    <menuitem name="List" id="ejro2122.menu_1_list" parent="ejro2122.menu_1"
+              action="ejro2122.action_window"/>
+<!--
+    <menuitem name="Server to list" id="ejro2122" parent="ejro2122.menu_2"
+              action="ejro2122.action_server"/>
+-->
+  </data>
+</odoo>
