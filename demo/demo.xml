@@ -1,0 +1,91 @@
+<odoo>
+    <data>
+
+          <record id="fish_0" model="ejro2122.fish">
+            <field name="specie">Oncorhynchus mykiss</field>
+            <field name="comname">Rainbow trout</field>
+            <field name="weight">350</field>
+            <field name="feeding">Carnivorous</field>
+            <field name="eggtime">30</field>
+            <field name="larvaetime">200</field>
+            <field name="juventime">340</field>
+            <field name="adultime">100</field>
+            <field name="description">River fish from North America.</field>
+          </record>
+
+          <record id="ofish_1" model="ejro2122.fish">
+            <field name="specie">Sparus aurata</field>
+            <field name="comname">Golden</field>
+            <field name="weight">800</field>
+            <field name="feeding">Omnivorous</field>
+            <field name="eggtime">30</field>
+            <field name="larvaetime">210</field>
+            <field name="juventime">370</field>
+            <field name="adultime">160</field>
+            <field name="description">Sea fish from the Mediterranean.</field>
+          </record>
+
+          <record id="fish_2" model="ejro2122.fish">
+            <field name="specie">Dicentrarchus labrax</field>
+            <field name="comname">Bass</field>
+            <field name="weight">1000</field>
+            <field name="feeding">Carnivorous</field>
+            <field name="eggtime">50</field>
+            <field name="larvaetime">200</field>
+            <field name="juventime">540</field>
+            <field name="adultime">200</field>
+            <field name="description">Sea fish from the Mediterranean.</field>
+          </record>
+
+
+        <record id="pool_0" model="ejro2122.pool">
+            <field name="name">Pool 1</field>
+            <field name="capacity">500</field>
+            <field name="water">none</field>
+            <field name="state">maintenance</field>
+            <field name="description">Pool for growing in fresh or salt water</field>
+        </record>
+
+        <record id="pool_1" model="ejro2122.pool">
+            <field name="name">Pool 2</field>
+            <field name="capacity">1200</field>
+            <field name="water">salt</field>
+            <field name="state">farming</field>
+            <field name="description">Pool for growing in fresh or salt water</field>
+        </record>
+
+        <record id="pool_2" model="ejro2122.pool">
+            <field name="name">Pool 3</field>
+            <field name="capacity">900</field>
+            <field name="water">fresh</field>
+            <field name="state">ready</field>
+            <field name="description">Pool for growing in fresh or salt water</field>
+        </record>
+
+        <record id="pool_3" model="ejro2122.pool">
+            <field name="name">Pool 4</field>
+            <field name="capacity">300</field>
+            <field name="water">fresh</field>
+            <field name="state">farming</field>
+            <field name="description">Pool for growing in fresh or salt water</field>
+        </record>
+
+<!--
+        <record id="farming_0" model="ejro2122.farm">
+            <field name="pool">Pool 2</field>
+            <field name="specie">Oncorhynchus mykiss</field>
+            <field name="feeding">Carnivorous</field>
+            <field name="lifecycle">1000</field>
+            <field name="transferdate" eval="datetime.now()+timedelta(days=-30)"/>
+        </record>
+
+        <record id="farming_0" model="ejro2122.farm">
+            <field name="pool">Pool 4</field>
+            <field name="specie">Sparus aurata</field>
+            <field name="feeding">Omnivorous</field>
+            <field name="lifecycle">1500</field>
+            <field name="transferdate" eval="datetime.now()+timedelta(days=-30)"/>
+        </record>
+-->
+    </data>
+</odoo>
