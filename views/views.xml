@@ -1,31 +1,117 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
+    <!-- list view for Fish Species-->
 
-    <record model="ir.ui.view" id="ejro2122.list">
-      <field name="name">fish list</field>
+    <record model="ir.ui.view" id="ejro2122.fish_list">
+      <field name="name">Fish list</field>
       <field name="model">ejro2122.fish</field>
       <field name="arch" type="xml">
         <tree>
           <field name="specie"/>
-          <field name="comname"/>
-          <field name="weight"/>
+          <field name="comname" string="Common name"/>
+          <field name="weight" string="Avg. weight (g)"/>
           <field name="feeding"/>
-          <field name="eggtime"/>
-          <field name="larvaetime"/>
-          <field name="juventime"/>
-          <field name="adultime"/>
-          <field name="lifecycle"/>
+          <field name="eggtime" string="Egg per.(d)"/>
+          <field name="larvaetime" string="Larvae per.(d)"/>
+          <field name="juventime" string="Juvenile per.(d)"/>
+          <field name="adultime" string="Adult per.(d)"/>
+          <field name="lifecycle" string="Lifecycle (d)"/>
           <field name="description"/>
         </tree>
       </field>
     </record>
 
-    <record model="ir.ui.view" id="ejro2122.pool">
+     <!-- sheet view for Fish Species-->
+    <record model="ir.ui.view" id="ejro2122.fish_form">
+      <field name="name">Fish form</field>
+      <field name="model">ejro2122.fish</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Specie details">
+          <sheet>
+            <group col="2">
+
+                <separator string="Data" colspan="2"/>
+
+                <group>
+                    <field name="specie" />
+                    <field name="comname" />
+                    <field name="weight" />
+                    <field name="feeding" string="Feeding type" widget="selection"/>
+                    <field name="description"/>
+
+                </group>
+            <div><field colspan="2" name="fishimg" string ="Picture" widget="image" class="o_kanban_image_fill_right" style="float:right;max-height:100px;"/></div>
+                <separator string="Life Cycle" colspan="2"/>
+                <group>
+                    <field name="eggtime" string="Egg per.(d)"/>
+                    <field name="larvaetime" string="Larvae per.(d)"/>
+                    <field name="juventime" string="Juvenile per.(d)"/>
+                    <field name="adultime" string="Adult per.(d)"/>
+                    <field name="lifecycle" string="Lifecycle (d)"/>
+                </group>
+            </group>
+          </sheet>
+
+        </form>
+      </field>
+    </record>
+
+    <!-- kanban view for Fish Species-->
+     <record id="hr_kanban_view_fish" model="ir.ui.view">
+           <field name="name">ejro2122.fish.kanban</field>
+           <field name="model">ejro2122.fish</field>
+           <field name="priority">10</field>
+           <field name="arch" type="xml">
+               <kanban class="o_fish_sheet_kanban">
+                   <field name="comname"/>
+                   <templates>
+                       <t t-name="kanban-box">
+                       <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_hr_kanban_record">
+                            <field name="fishimg" widget="image" class="o_kanban_image_fill_left" options="{'zoom': true, 'zoom_delay': 1000,'background': true, 'preventClicks': false}"/>
+                            <div class="oe_kanban_details">
+                               <div class="o_kanban_record_top">
+                                   <div class="o_kanban_record_headings">
+                                       <strong class="o_kanban_record_title">
+
+                                            <div class="float-right" t-if="record.feeding == 'herbivorous'">
+                                                <span class="fa fa-circle text-success" role="img" aria-label="Herbivorous" title="Herbivorous" name="feed_herb"></span>
+                                            </div>
+                                            <div class="float-right" t-if="record.feeding == 'carnivorous'">
+                                                <span class="fa fa-circle text-danger" role="img" aria-label="Carnivorous" title="Carnivorous" name="feed_carn"></span>
+                                            </div>
+                                            <div class="float-right" t-if="record.feeding == 'omnivorous'">
+                                                <span class="fa fa-circle text-warning" role="img" aria-label="Omnivorous" title="Omnivorous" name="feed_omni"></span>
+                                            </div>
+<!-- fa-seedling fa-drumstick-bite fa-pizza-slice -->
+
+                                            <field name="specie" placeholder="Scientific name"/>
+
+                                       </strong>
+                                       <span t-if="record.feeding" class="o_kanban_record_subtitle"><field name="feeding"/></span>
+                                       <!-- <span t-if="record.cooktype.raw_value" class="o_kanban_record_subtitle"><field name="cooktype"/></span> -->
+                                   </div>
+
+                               </div>
+                               <field name="comname" placeholder="Common name"/>
+                               <field name="description"/>
+                               <!-- <ul>
+                                   <li t-if="record.timelabor.raw_value" class="o_force_ltr"><field name="timelabor" /></li>
+                               </ul> -->
+                           </div>
+                       </div>
+                       </t>
+                   </templates>
+               </kanban>
+           </field>
+    </record>
+    <!-- list view for Installation Pools-->
+
+    <record model="ir.ui.view" id="ejro2122.pool_list">
       <field name="name">pool list</field>
       <field name="model">ejro2122.pool</field>
       <field name="arch" type="xml">
-        <tree>
+        <tree decoration-danger="state=='maintenance'" decoration-bf="state=='farming'" decoration-success="state=='ready'">
           <field name="name"/>
           <field name="capacity"/>
           <field name="water"/>
@@ -35,22 +121,92 @@
       </field>
     </record>
 
+    <!-- list view for Fish Farmings
+
+      <record model="ir.ui.view" id="ejro2122.farm_list">
+      <field name="name">farming list</field>
+      <field name="model">ejro2122.farm</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="pool"/>
+          <field name="specie"/>
+          <field name="feeding"/>
+          <field name="lifecycle"/>
+          <field name="transferdate"/>
+          <field name="fishingdate"/>
+          <field name="oncharge"/>
+
+        </tree>
+      </field>
+    </record>
+-->
+
+      <record model="ir.ui.view" id="ejro2122.farm_list">
+      <field name="name">farming list</field>
+      <field name="model">ejro2122.farm</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="pool"/>
+          <field name="specie"/>
+          <field name="feeding"/>
+          <field name="lifecycle"/>
+          <field name="transferdate"/>
+          <field name="fishingdate"/>
+<!--          <field name="oncharge"/>-->
+
+        </tree>
+      </field>
+    </record>
+
+    <!-- calendar view for Fish Farmings-->
+    <!-- TODO
+    <record model="ir.ui.view" id="cook.recipe_calendar">
+        <field name="name">fish farmings calendar</field>
+        <field name="model">cook.recipe</field>
+        <field name="arch" type="xml">
+            <calendar string="Recipe Calendar" date_start="datetime_begin" color="cooktype" mode="month">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+    -->
 
     <!-- actions opening for Fish-->
 
-    <record model="ir.actions.act_window" id="fish.action_window">
-      <field name="name">fish window</field>
+    <record model="ir.actions.act_window" id="ejro2122.fish_action_window">
+      <field name="name">Fish window</field>
       <field name="res_model">ejro2122.fish</field>
-      <field name="view_mode">tree</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ejro2122.fish2_action_window">
+      <field name="name">Fish window2</field>
+      <field name="res_model">ejro2122.fish</field>
+      <field name="view_mode">form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ejro2122.fish3_action_window">
+      <field name="name">Fish window3</field>
+      <field name="res_model">ejro2122.fish</field>
+      <field name="view_mode">kanban</field>
     </record>
 
       <!-- actions opening for Pool-->
 
-    <record model="ir.actions.act_window" id="pool.action_window">
-      <field name="name">pool window</field>
+    <record model="ir.actions.act_window" id="ejro2122.pool_action_window">
+      <field name="name">Pool window</field>
       <field name="res_model">ejro2122.pool</field>
       <field name="view_mode">tree</field>
     </record>
+
+       <!-- actions opening for Farming-->
+
+    <record model="ir.actions.act_window" id="ejro2122.farm_action_window">
+      <field name="name">Farming window</field>
+      <field name="res_model">ejro2122.farm</field>
+      <field name="view_mode">tree</field>
+    </record>
+
 
     <!-- server action to the one above -->
 <!--
@@ -70,17 +226,27 @@
 
     <!-- Top menu item -->
 
-    <menuitem name="fishfarm" id="ejro2122.menu_root" web_icon="cook,static/description/icon.png"/>
+    <menuitem name="Fish Farm Manager" id="ejro2122.menu_root" web_icon="fish,static/description/icon.png"/>
 
     <!-- menu categories -->
 
-    <menuitem name="Pools" id="ejro2122.menu_1" parent="ejro2122.menu_root" sequence="1"/>
-    <menuitem name="Fishes" id="ejro2122.menu_2" parent="ejro2122.menu_root" sequence="2" action="fish.action_window"/>
+    <menuitem name="Fish lists" id="ejro2122.menu_1" parent="ejro2122.menu_root" sequence="1"/>
+    <menuitem name="Installation pools" id="ejro2122.menu_2" parent="ejro2122.menu_root" sequence="2" action="ejro2122.fish_action_window"/>
+    <menuitem name="Farming processes" id="ejro2122.menu_3" parent="ejro2122.menu_root" sequence="3" action="ejro2122.farm_action_window"/>
+
 
     <!-- actions -->
 
-    <menuitem name="List" id="ejro2122.menu_1_list" parent="ejro2122.menu_1"
-              action="ejro2122.action_window"/>
+    <menuitem name="Pool List" id="ejro2122.menu_1_list" parent="ejro2122.menu_2"
+              action="ejro2122.pool_action_window"/>
+    <menuitem name="Fish List" id="ejro2122.menu_2_list" parent="ejro2122.menu_1"
+              action="ejro2122.fish_action_window"/>
+    <menuitem name="Fish Form" id="ejro2122.menu_3_form" parent="ejro2122.menu_1"
+              action="ejro2122.fish2_action_window"/>
+    <menuitem name="Fish Kanban" id="ejro2122.menu_4_form" parent="ejro2122.menu_1"
+              action="ejro2122.fish3_action_window"/>
+    <menuitem name="Farming List" id="ejro2122.menu_5_form" parent="ejro2122.menu_3"
+              action="ejro2122.farm_action_window"/>
 <!--
     <menuitem name="Server to list" id="ejro2122" parent="ejro2122.menu_2"
               action="ejro2122.action_server"/>
