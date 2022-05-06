@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <menuitem name="Fish Farm Manager" id="ejro2122.menu_root" web_icon="fish,static/description/icon.png"/>-->
+    <!-- Top menu item -->
+    <menuitem id="fish_menu_root" name="Fish Farm Manager">
+        <menuitem id="fish_menu" name="Fish Register" sequence="5">
+            <menuitem id="fish_menu_action" action="ejro21222.fish_action_window" sequence="5"/>
+        </menuitem>
+        <menuitem id="pool_menu" name="Installation Pools" sequence="5">
+            <menuitem id="pool_menu_action" action="ejro21222.pool_action_window" sequence="5"/>
+        </menuitem>
+<!--        <menuitem id="farm_menu" name="Farming Processes" sequence="5">-->
+<!--            <menuitem id="farm_menu_action" action="ejro21222.farm_action_window" sequence="5"/>-->
+<!--        </menuitem>-->
+<!--        <menuitem id="estate_settings_menu" name="Settings" sequence="10">-->
+<!--            <menuitem id="estate_property_type_menu_action" action="estate_property_type_action" sequence="5"/>-->
+<!--            <menuitem id="estate_property_tag_menu_action" action="estate_property_tag_action" sequence="10"/>-->
+<!--        </menuitem>-->
+<!--        <menuitem id="estate_log_menu" name="Log" sequence="15">-->
+<!--            <menuitem id="request_log_menu_action" action="request_log_action" sequence="5"/>-->
+<!--        </menuitem>-->
+    </menuitem>
+</odoo>

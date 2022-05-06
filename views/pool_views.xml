@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- list view for Pools-->
+
+    <record model="ir.ui.view" id="ejro21222.pool_list">
+      <field name="name">ejro21222.pool.tree</field>
+      <field name="model">ejro21222.pool</field>
+      <field name="arch" type="xml">
+        <tree decoration-danger="state=='maintenance'" decoration-bf="state=='farming'" decoration-success="state=='ready'">
+          <field name="name"/>
+          <field name="capacity"/>
+          <field name="water"/>
+          <field name="state"/>
+<!--          <field name="description"/>-->
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening for Pools-->
+
+    <record model="ir.actions.act_window" id="ejro21222.pool_action_window">
+      <field name="name">Installation Pools</field>
+      <field name="res_model">ejro21222.pool</field>
+      <field name="view_mode">tree</field>
+      <field name="context">{'search_default_available': 1}</field>
+    </record>
+
+</odoo>

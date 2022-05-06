@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- list view for Fish Species-->
+
+    <record model="ir.ui.view" id="ejro21222.fish_list">
+      <field name="name">ejro21222.fish.tree</field>
+      <field name="model">ejro21222.fish</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="specie"/>
+          <field name="comname" string="Common name"/>
+          <field name="weight" string="Avg. weight (g)"/>
+          <field name="feeding"/>
+          <field name="eggtime" string="Egg per.(d)"/>
+          <field name="larvaetime" string="Larvae per.(d)"/>
+          <field name="juventime" string="Juvenile per.(d)"/>
+          <field name="adultime" string="Adult per.(d)"/>
+          <field name="lifecycle" string="Lifecycle (d)"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+     <!-- sheet view for Fish Species-->
+    <record model="ir.ui.view" id="ejro21222.fish_form">
+      <field name="name">ejro21222.fish.form</field>
+      <field name="model">ejro21222.fish</field>
+      <field name="arch" type="xml">
+        <form string="Specie details">
+          <sheet>
+            <group col="2">
+
+                <separator string="Data" colspan="2"/>
+
+                <group>
+                    <field name="specie" />
+                    <field name="comname" />
+                    <field name="weight" />
+                    <field name="feeding" string="Feeding type" widget="selection"/>
+                    <field name="description"/>
+
+                </group>
+            <div><field colspan="2" name="fishimg" string ="Picture" widget="image" class="o_kanban_image_fill_right" style="float:right;max-height:100px;"/></div>
+                <separator string="Life Cycle" colspan="2"/>
+                <group>
+                    <field name="eggtime" string="Egg per.(d)"/>
+                    <field name="larvaetime" string="Larvae per.(d)"/>
+                    <field name="juventime" string="Juvenile per.(d)"/>
+                    <field name="adultime" string="Adult per.(d)"/>
+                    <field name="lifecycle" string="Lifecycle (d)"/>
+                </group>
+            </group>
+          </sheet>
+
+        </form>
+      </field>
+    </record>
+
+    <!-- kanban view for Fish Species-->
+     <record id="hr_kanban_view_fish" model="ir.ui.view">
+           <field name="name">ejro21222.fish.kanban</field>
+           <field name="model">ejro21222.fish</field>
+           <field name="arch" type="xml">
+               <kanban class="o_fish_sheet_kanban">
+                   <field name="comname"/>
+                   <templates>
+                       <t t-name="kanban-box">
+                       <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_hr_kanban_record">
+                            <field name="fishimg" widget="image" class="o_kanban_image_fill_left" options="{'zoom': true, 'zoom_delay': 1000,'background': true, 'preventClicks': false}"/>
+                            <div class="oe_kanban_details">
+                               <div class="o_kanban_record_top">
+                                   <div class="o_kanban_record_headings">
+                                       <strong class="o_kanban_record_title">
+
+                                            <div class="float-right" t-if="record.feeding == 'herbivorous'">
+                                                <span class="fa fa-circle text-success" role="img" aria-label="Herbivorous" title="Herbivorous" name="feed_herb"></span>
+                                            </div>
+                                            <div class="float-right" t-if="record.feeding == 'carnivorous'">
+                                                <span class="fa fa-circle text-danger" role="img" aria-label="Carnivorous" title="Carnivorous" name="feed_carn"></span>
+                                            </div>
+                                            <div class="float-right" t-if="record.feeding == 'omnivorous'">
+                                                <span class="fa fa-circle text-warning" role="img" aria-label="Omnivorous" title="Omnivorous" name="feed_omni"></span>
+                                            </div>
+<!-- fa-seedling fa-drumstick-bite fa-pizza-slice -->
+
+                                            <field name="specie" placeholder="Scientific name"/>
+
+                                       </strong>
+                                       <span t-if="record.feeding" class="o_kanban_record_subtitle"><field name="feeding"/></span>
+                                       <!-- <span t-if="record.cooktype.raw_value" class="o_kanban_record_subtitle"><field name="cooktype"/></span> -->
+                                   </div>
+
+                               </div>
+                               <field name="comname" placeholder="Common name"/>
+                               <field name="description"/>
+                               <!-- <ul>
+                                   <li t-if="record.timelabor.raw_value" class="o_force_ltr"><field name="timelabor" /></li>
+                               </ul> -->
+                           </div>
+                       </div>
+                       </t>
+                   </templates>
+               </kanban>
+           </field>
+    </record>
+
+    <!-- actions opening for Fish-->
+
+    <record model="ir.actions.act_window" id="ejro21222.fish_action_window">
+      <field name="name">Fish register</field>
+      <field name="res_model">ejro21222.fish</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="context">{'search_default_available': 1}</field>
+    </record>
+
+</odoo>
